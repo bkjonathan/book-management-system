@@ -10,7 +10,7 @@ export type { Publishers, PublishersData, PublishersPatch, PublishersQuery }
 
 export interface PublishersParams extends MongoDBAdapterParams<PublishersQuery> {}
 
-// By default calls the standard MongoDB adapter service methods but can be customized with your own functionality.
+// By default, calls the standard MongoDB adapter service methods but can be customized with your own functionality.
 export class PublishersService<ServiceParams extends Params = PublishersParams> extends MongoDBService<
   Publishers,
   PublishersData,

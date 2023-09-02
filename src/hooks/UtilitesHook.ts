@@ -3,7 +3,7 @@ import type { HookContext } from '../declarations'
 
 export const changeDateToNumber = (key: string) => {
   return async (context: HookContext) => {
-    if (context.data[key]) {
+    if (context.data && context.data[key]) {
       context.data[key] = new Date(context.data[key]).valueOf()
     }
   }
@@ -81,6 +81,14 @@ export const changeCategoryToId = async (context: HookContext) => {
     if (getCategories.total){
       context.params.query.categories = getCategories.data.map((v)=>v._id.toString())[0];
     }
+  }
+}
+
+export const calculateSell = async (context: HookContext) => {
+  if (context.data && Object.keys(context.data).length && context.data.detail?.length){
+    context.data.netTotal = context.data.detail.reduce((total:number,item:Record<string, any>)=>total+= (item.qty*item.price),0)
+    context.data.total = context.data.netTotal - context.data.discount;
+    context.data.totalReturn = (context.data.totalPaid - context.data.netTotal) + context.data.discount  ;
   }
 }
 
