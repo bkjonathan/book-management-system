@@ -16,7 +16,12 @@ import {
 
 import type { Application } from '../../declarations'
 import { BooksService, getOptions } from './books.class'
-import {changeDateToNumber} from "../../hooks/UtilitesHook";
+import {
+  changeDateToNumber,
+  populateAuthors,
+  populateCategories,
+  populatePublishers
+} from '../../hooks/UtilitesHook'
 
 export const booksPath = 'books'
 export const booksMethods = ['find', 'get', 'create', 'patch', 'remove'] as const
@@ -43,10 +48,20 @@ export const books = (app: Application) => {
       ]
     },
     before: {
-      all: [schemaHooks.validateQuery(booksQueryValidator), schemaHooks.resolveQuery(booksQueryResolver)],
+      all: [
+        populateAuthors,
+        populateCategories,
+        populatePublishers,
+        schemaHooks.validateQuery(booksQueryValidator),
+        schemaHooks.resolveQuery(booksQueryResolver)
+      ],
       find: [],
       get: [],
-      create: [changeDateToNumber('publicationDate'),schemaHooks.validateData(booksDataValidator), schemaHooks.resolveData(booksDataResolver)],
+      create: [
+        changeDateToNumber('publicationDate'),
+        schemaHooks.validateData(booksDataValidator),
+        schemaHooks.resolveData(booksDataResolver)
+      ],
       patch: [schemaHooks.validateData(booksPatchValidator), schemaHooks.resolveData(booksPatchResolver)],
       remove: []
     },

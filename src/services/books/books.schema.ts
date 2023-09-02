@@ -17,7 +17,7 @@ export const booksSchema = Type.Object(
     title: Type.String(),
     description: Type.Optional(Type.String()),
     isbn: Type.Optional(Type.Number()),
-    publicationDate: Type.Number(),
+    publicationDate: Type.Union([Type.Number(), Type.String()]),
     price: Type.Number(),
     createdBy: Type.Optional(ObjectIdSchema()),
     createdAt: Type.Number(),
@@ -29,7 +29,11 @@ export type Books = Static<typeof booksSchema>
 export const booksValidator = getValidator(booksSchema, dataValidator)
 export const booksResolver = resolve<Books, HookContext>({})
 
-export const booksExternalResolver = resolve<Books, HookContext>({})
+export const booksExternalResolver = resolve<Books, HookContext>({
+  publicationDate: async (value) => {
+    return value ? new Date(value).toISOString() : value
+  }
+})
 
 // Schema for creating new entries
 export const booksDataSchema = Type.Pick(
