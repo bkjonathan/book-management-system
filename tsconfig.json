@@ -5,7 +5,7 @@
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
-    "outDir": "./lib",
+    "outDir": "./build",
     "rootDir": "./src",
     "declaration": true,
     "strict": true,
@@ -16,6 +16,7 @@
     "src"
   ],
   "exclude": [
-    "test"
+    "test",
+    "build"
   ]
 }
