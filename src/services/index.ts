@@ -1,3 +1,4 @@
+import { books } from './books/books'
 import { publishers } from './publishers/publishers'
 import { customers } from './customers/customers'
 import { authors } from './authors/authors'
@@ -7,6 +8,7 @@ import { user } from './users/users'
 import type { Application } from '../declarations'
 
 export const services = (app: Application) => {
+  app.configure(books)
   app.configure(publishers)
   app.configure(customers)
   app.configure(authors)

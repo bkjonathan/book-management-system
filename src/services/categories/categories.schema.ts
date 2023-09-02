@@ -11,7 +11,8 @@ import { dataValidator, queryValidator } from '../../validators'
 export const categoriesSchema = Type.Object(
   {
     _id: ObjectIdSchema(),
-    name: Type.String()
+    name: Type.String(),
+    description: Type.String(),
   },
   { $id: 'Categories', additionalProperties: false }
 )
@@ -22,7 +23,7 @@ export const categoriesResolver = resolve<Categories, HookContext>({})
 export const categoriesExternalResolver = resolve<Categories, HookContext>({})
 
 // Schema for creating new entries
-export const categoriesDataSchema = Type.Pick(categoriesSchema, ['name'], {
+export const categoriesDataSchema = Type.Pick(categoriesSchema, ['name','description'], {
   $id: 'CategoriesData'
 })
 export type CategoriesData = Static<typeof categoriesDataSchema>
@@ -38,7 +39,7 @@ export const categoriesPatchValidator = getValidator(categoriesPatchSchema, data
 export const categoriesPatchResolver = resolve<Categories, HookContext>({})
 
 // Schema for allowed query properties
-export const categoriesQueryProperties = Type.Pick(categoriesSchema, ['_id', 'name'])
+export const categoriesQueryProperties = Type.Pick(categoriesSchema, ['_id', 'name','description'])
 export const categoriesQuerySchema = Type.Intersect(
   [
     querySyntax(categoriesQueryProperties),

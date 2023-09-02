@@ -14,6 +14,7 @@ export const authorsSchema = Type.Object(
     name: Type.String(),
     biography: Type.String(),
     dob: Type.Number(),
+    nationality: Type.String(),
     createdBy: Type.Optional(ObjectIdSchema()),
     createdAt: Type.Number(),
     updatedAt: Type.Number()
@@ -27,7 +28,7 @@ export const authorsResolver = resolve<Authors, HookContext>({})
 export const authorsExternalResolver = resolve<Authors, HookContext>({})
 
 // Schema for creating new entries
-export const authorsDataSchema = Type.Pick(authorsSchema, ['name', 'biography', 'dob'], {
+export const authorsDataSchema = Type.Pick(authorsSchema, ['name', 'biography', 'dob','nationality'], {
   $id: 'AuthorsData'
 })
 export type AuthorsData = Static<typeof authorsDataSchema>
@@ -35,7 +36,6 @@ export const authorsDataValidator = getValidator(authorsDataSchema, dataValidato
 export const authorsDataResolver = resolve<Authors, HookContext>({
   dob: async (_value, _profile) => {
     // Associate the record with the id of the authenticated user
-    console.log(_value,'ares')
     if (_value){
       return new Date(_value).valueOf()
     }
@@ -62,7 +62,7 @@ export const authorsPatchResolver = resolve<Authors, HookContext>({
 })
 
 // Schema for allowed query properties
-export const authorsQueryProperties = Type.Pick(authorsSchema, ['_id', 'name', 'biography', 'dob'])
+export const authorsQueryProperties = Type.Pick(authorsSchema, ['_id', 'name', 'biography', 'dob','nationality'])
 export const authorsQuerySchema = Type.Intersect(
   [
     querySyntax(authorsQueryProperties),

@@ -16,7 +16,7 @@ import {
 
 import type { Application } from '../../declarations'
 import { AuthorsService, getOptions } from './authors.class'
-import {changeDateToNumber} from "../../hooks/author-hook";
+import {changeDateToNumber} from "../../hooks/UtilitesHook";
 
 export const authorsPath = 'authors'
 export const authorsMethods = ['find', 'get', 'create', 'patch', 'remove'] as const
@@ -46,8 +46,8 @@ export const authors = (app: Application) => {
       all: [schemaHooks.validateQuery(authorsQueryValidator), schemaHooks.resolveQuery(authorsQueryResolver)],
       find: [],
       get: [],
-      create: [changeDateToNumber,schemaHooks.validateData(authorsDataValidator), schemaHooks.resolveData(authorsDataResolver)],
-      patch: [schemaHooks.validateData(authorsPatchValidator), schemaHooks.resolveData(authorsPatchResolver)],
+      create: [changeDateToNumber('dob'),schemaHooks.validateData(authorsDataValidator), schemaHooks.resolveData(authorsDataResolver)],
+      patch: [changeDateToNumber('dob'),schemaHooks.validateData(authorsPatchValidator), schemaHooks.resolveData(authorsPatchResolver)],
       remove: []
     },
     after: {
