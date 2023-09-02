@@ -81,7 +81,9 @@ export const booksQueryProperties = Type.Pick(booksSchema, [
 ])
 export const booksQuerySchema = Type.Intersect(
   [
-    querySyntax(booksQueryProperties),
+    querySyntax(booksQueryProperties,{
+      title: { $regex: Type.String(), $options: Type.String() }
+    }),
     // Add additional query properties here
     Type.Object({}, { additionalProperties: false })
   ],

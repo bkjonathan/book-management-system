@@ -65,7 +65,9 @@ export const authorsPatchResolver = resolve<Authors, HookContext>({
 export const authorsQueryProperties = Type.Pick(authorsSchema, ['_id', 'name', 'biography', 'dob','nationality'])
 export const authorsQuerySchema = Type.Intersect(
   [
-    querySyntax(authorsQueryProperties),
+    querySyntax(authorsQueryProperties,{
+      name: { $regex: Type.String(), $options: Type.String() }
+    }),
     // Add additional query properties here
     Type.Object({}, { additionalProperties: false })
   ],

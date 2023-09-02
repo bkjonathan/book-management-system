@@ -42,7 +42,9 @@ export const categoriesPatchResolver = resolve<Categories, HookContext>({})
 export const categoriesQueryProperties = Type.Pick(categoriesSchema, ['_id', 'name','description'])
 export const categoriesQuerySchema = Type.Intersect(
   [
-    querySyntax(categoriesQueryProperties),
+    querySyntax(categoriesQueryProperties,{
+      name:{$regex:Type.String(),$options:Type.String()}
+    }),
     // Add additional query properties here
     Type.Object({}, { additionalProperties: false })
   ],

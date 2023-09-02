@@ -17,6 +17,7 @@ import {
 import type { Application } from '../../declarations'
 import { BooksService, getOptions } from './books.class'
 import {
+  changeAuthorToId, changeCategoryToId,
   changeDateToNumber,
   populateAuthors,
   populateCategories,
@@ -52,6 +53,8 @@ export const books = (app: Application) => {
         populateAuthors,
         populateCategories,
         populatePublishers,
+        changeAuthorToId,
+        changeCategoryToId,
         schemaHooks.validateQuery(booksQueryValidator),
         schemaHooks.resolveQuery(booksQueryResolver)
       ],

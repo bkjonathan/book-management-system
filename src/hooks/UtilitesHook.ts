@@ -50,3 +50,37 @@ export const populatePublishers = async (context: HookContext) => {
     { $unwind: { path: '$publisher' } }
   ]
 }
+
+export const changeAuthorToId = async (context: HookContext) => {
+  if (context.params.query?.authors && !Array.isArray(context.params.query?.authors)){
+    const keyword = context.params.query.authors;
+    const getAuthors = await context.app.service('authors').find({
+      query:{
+        name:{
+          $regex:keyword,
+          $options:'i'
+        }
+      }
+    })
+    if (getAuthors.total){
+      context.params.query.authors = getAuthors.data.map((v)=>v._id)
+    }
+  }
+}
+export const changeCategoryToId = async (context: HookContext) => {
+  if (context.params.query?.categories){
+    const keyword = context.params.query.categories;
+    const getCategories = await context.app.service('categories').find({
+      query:{
+        name:{
+          $regex:keyword,
+          $options:'i'
+        }
+      }
+    })
+    if (getCategories.total){
+      context.params.query.categories = getCategories.data.map((v)=>v._id.toString())[0];
+    }
+  }
+}
+
