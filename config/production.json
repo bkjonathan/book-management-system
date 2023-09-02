@@ -1,0 +1,9 @@
+{
+  "host": "https,://feathers-book-b91109000892.herokuapp.com",
+  "port": 443,
+  "public": "./public/",
+  "origins": [
+    "https,://feathers-book-b91109000892.herokuapp.com"
+  ],
+  "mongodb": "mongodb+srv://bkthomaskhs:ISZEuvDSmdCzl7rV@cluster0.fko1adr.mongodb.net/?retryWrites=true&w=majority"
+}
