@@ -1,0 +1,1910 @@
+{
+	"info": {
+		"_postman_id": "b6f30ee1-5e06-4697-aee5-aadc339112cc",
+		"name": "Book Store Management",
+		"description": "Implement backend APIs for “Book Store Management ” System using Node JS  \ntechnology ( Feathers JS).\n\nThe System implement APIs with the following features.\n\n1. Login / Register\n2. For managing book categories, users can view category lists , add new  \n    categories and remove categories.\n3. For managing books, search books by book name, author and category name.  \n    And also, add a new book, update the book and remove the book.\n4. For managing selling books, users can add selling books with corresponding data  \n    (book name, customer name, quantity and discount). Total amount shows the  \n    total cost of the books and next you have to enter how much money to pay.For managing sale records, users can see and manage sales records with sell id,  \n    customer name, amount, paid and due.Calculate the total amount and total  \n    paid.\n5. For managing customer records, users can view and manage customers. Update  \n    and Remove customer data also.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16473367"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\",pm.response.json().accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"strategy\": \"local\",\n    \"email\": \"evokyaw@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/authentication",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"authentication"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"strategy\": \"local\",\n    \"email\": \"evokyaw@gmail.com\",\n    \"password\": \"12345678\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/authentication",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"authentication"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "598"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:12:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2OTM2NDU5NzUsImV4cCI6MTY5MzczMjM3NSwiYXVkIjoiaHR0cHM6Ly95b3VyZG9tYWluLmNvbSIsInN1YiI6IjY0ZjIyY2UyODhhYTY4ZmUwNDczNWU2ZSIsImp0aSI6Ijk3NWUyYWM3LTkyOWYtNDU4Ny1iNTRlLWI5YWVhNGY5M2U5YyJ9.f0cIyfMZWSsXX09P7CATl7Ov2wk5gRhYeVwo8VlydQg\",\n    \"authentication\": {\n        \"strategy\": \"local\",\n        \"payload\": {\n            \"iat\": 1693645975,\n            \"exp\": 1693732375,\n            \"aud\": \"https://yourdomain.com\",\n            \"sub\": \"64f22ce288aa68fe04735e6e\",\n            \"jti\": \"975e2ac7-929f-4587-b54e-b9aea4f93e9c\"\n        }\n    },\n    \"user\": {\n        \"_id\": \"64f22ce288aa68fe04735e6e\",\n        \"email\": \"evokyaw@gmail.com\",\n        \"role\": \"user\",\n        \"createdAt\": 1693592802902\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "AuthMe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/users/64f3eed4f9b3c8d63cb7bb65",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"users",
+								"64f3eed4f9b3c8d63cb7bb65"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "AuthMe",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/users/64f22ce288aa68fe04735e6e",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"users",
+										"64f22ce288aa68fe04735e6e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "102"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:13:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f22ce288aa68fe04735e6e\",\n    \"email\": \"evokyaw@gmail.com\",\n    \"role\": \"user\",\n    \"createdAt\": 1693592802902\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"evokyaw@gmail.com\",\n    \"password\":\"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/users",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Login / Register"
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/categories",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/categories",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "268"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:03:52 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f3f014f9b3c8d63cb7bb67\",\n            \"name\": \"Science\",\n            \"description\": \"Works based on facts, principles, and theories.\"\n        },\n        {\n            \"_id\": \"64f3f7896fbc555998381fa6\",\n            \"name\": \"Fiction\",\n            \"description\": \"Literary works invented by the imagination.\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Categories",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Fiction\",\n    \"description\":\"Literary works invented by the imagination.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/categories",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Categories",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Fiction\",\n    \"description\":\"Literary works invented by the imagination.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/categories",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "111"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:03:37 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f7896fbc555998381fa6\",\n    \"name\": \"Fiction\",\n    \"description\": \"Literary works invented by the imagination.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Categories",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Science\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/categories/64f3f014f9b3c8d63cb7bb67",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"categories",
+								"64f3f014f9b3c8d63cb7bb67"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit Categories",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Science\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/categories/64f3f014f9b3c8d63cb7bb67",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"categories",
+										"64f3f014f9b3c8d63cb7bb67"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:04:35 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f014f9b3c8d63cb7bb67\",\n    \"name\": \"Science\",\n    \"description\": \"Works based on facts, principles, and theories.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Categories",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/categories/64f3f014f9b3c8d63cb7bb77",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"categories",
+								"64f3f014f9b3c8d63cb7bb77"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing book categories, users can view category lists , add new  \ncategories and remove categories.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Get Authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/authors",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Authors",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/authors",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "760"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:13:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 3,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2bf686a3137cfd16eefdf\",\n            \"name\": \"F. Scott Fitzgerald\",\n            \"biography\": \"American novelist and short story writer.\",\n            \"nationality\": \"American\",\n            \"dob\": -2312150400000,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693630312691\n        },\n        {\n            \"_id\": \"64f2bf8a6a3137cfd16eefe0\",\n            \"name\": \"Harper Lee\",\n            \"biography\": \"Known for her 1960 novel \\\"To Kill a Mockingbird\\\".\",\n            \"nationality\": \"American\",\n            \"dob\": -1378425600000,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693630346305,\n            \"updatedAt\": 1693630840019\n        },\n        {\n            \"_id\": \"64f2c6711d59a0cdecfa7a9c\",\n            \"name\": \"Stephen Hawking\",\n            \"biography\": \"Theoretical physicist, cosmologist, and author.\",\n            \"nationality\": \"British\",\n            \"dob\": -883008000000,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632113456\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Authors",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Stephen Hawking\",\n    \"biography\": \"Theoretical physicist, cosmologist, and author.\",\n    \"dob\": \"1942-01-08\",\n    \"nationality\":\"British\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/authors",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Authors",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Stephen Hawking\",\n    \"biography\": \"Theoretical physicist, cosmologist, and author.\",\n    \"dob\": \"1942-01-08\",\n    \"nationality\":\"British\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/authors",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "230"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:05:19 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f7ef6fbc555998381fa7\",\n    \"name\": \"Stephen Hawking\",\n    \"biography\": \"Theoretical physicist, cosmologist, and author.\",\n    \"nationality\": \"British\",\n    \"dob\": -883008000000,\n    \"createdBy\": \"64f3eed4f9b3c8d63cb7bb65\",\n    \"createdAt\": 1693710319041\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Authors",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dob\":\"1926-04-28\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/authors/64f2bf8a6a3137cfd16eefe0",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"authors",
+								"64f2bf8a6a3137cfd16eefe0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Authors",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/authors/64f2c05f38db23f0daa5f6ee",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"authors",
+								"64f2c05f38db23f0daa5f6ee"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing authors, users can view author lists , add new  \nauthors and remove authors.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Get Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/customers",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Customers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/customers",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "332"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:14:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2be9f611e091b44480da3\",\n            \"name\": \"Alice Johnson\",\n            \"email\": \"alice.johnson@email.com\",\n            \"phone\": \"123-456-7890\",\n            \"address\": \"123 Maple St, City, Zip\"\n        },\n        {\n            \"_id\": \"64f2c7361d59a0cdecfa7a9d\",\n            \"name\": \"Bob Smith\",\n            \"email\": \"bob.smith@email.com\",\n            \"phone\": \"234-567-8901\",\n            \"address\": \"456 Elm St, City, Zip\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Customers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bob Smith\",\n    \"email\": \"bob.smith@email.com\",\n    \"phone\": \"234-567-8901\",\n    \"address\": \"456 Elm St, City, Zip\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/customers",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Customers",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bob Smith\",\n    \"email\": \"bob.smith@email.com\",\n    \"phone\": \"234-567-8901\",\n    \"address\": \"456 Elm St, City, Zip\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/customers",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "140"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:09:43 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f8f66fbc555998381faa\",\n    \"name\": \"Bob Smith\",\n    \"email\": \"bob.smith@email.com\",\n    \"phone\": \"234-567-8901\",\n    \"address\": \"456 Elm St, City, Zip\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Customers",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Edit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/customers/64f2acac20eca5936d7fa680",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"customers",
+								"64f2acac20eca5936d7fa680"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customers",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/customers/64f2acac20eca5936d7fa680",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"customers",
+								"64f2acac20eca5936d7fa680"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing customer records, users can view and manage customers. Update and Remove customer data.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Publishers",
+			"item": [
+				{
+					"name": "Get Publishers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/publishers",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Publishers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/publishers",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"publishers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "446"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:13:06 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 3,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f3f9726fbc555998381fac\",\n            \"name\": \"Bantam\",\n            \"email\": \"bantam@email.com\",\n            \"phone\": \"345-000-0002\",\n            \"address\": \"789 Page Rd, City\"\n        },\n        {\n            \"_id\": \"64f3f9956fbc555998381fad\",\n            \"name\": \"Scribner\",\n            \"email\": \"scribner@gmail.com\",\n            \"phone\": \"123-000-0000\",\n            \"address\": \"123 Book St, City\"\n        },\n        {\n            \"_id\": \"64f3f9bb6fbc555998381fae\",\n            \"name\": \"HarperCollins\",\n            \"email\": \"harper@gmail.com\",\n            \"phone\": \"234-000-0001\",\n            \"address\": \"456 Novel Ave, City\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Publishers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bantam\",\n    \"email\": \"bantam@email.com\",\n    \"phone\": \"345-000-0002\",\n    \"address\": \"789 Page Rd, City\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/publishers/64f2acac20eca5936d7fa680",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"publishers",
+								"64f2acac20eca5936d7fa680"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Publishers",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bantam\",\n    \"email\": \"bantam@email.com\",\n    \"phone\": \"345-000-0002\",\n    \"address\": \"789 Page Rd, City\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/publishers/64f2acac20eca5936d7fa680",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"publishers",
+										"64f2acac20eca5936d7fa680"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "130"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:11:47 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f9726fbc555998381fac\",\n    \"name\": \"Bantam\",\n    \"email\": \"bantam@email.com\",\n    \"phone\": \"345-000-0002\",\n    \"address\": \"789 Page Rd, City\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Publishers",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Edit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/publishers/64f2b3b01350884533a7c9df",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"publishers",
+								"64f2b3b01350884533a7c9df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Publishers",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/publishers/64f2b3b01350884533a7c9df",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"publishers",
+								"64f2b3b01350884533a7c9df"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing Publisher records, publisher can view and manage publisher. Update and Remove publisher data.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/books",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/books",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"books"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2301"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:12:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 3,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2c8fe1b84e9adb8b02b78\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be1b611e091b44480da0\",\n                \"name\": \"Scribner\",\n                \"email\": \"scribner@gmail.com\",\n                \"phone\": \"123-000-0000\",\n                \"address\": \"123 Book St, City\"\n            },\n            \"title\": \"The Great Gatsby\",\n            \"description\": \"-\",\n            \"isbn\": 9780743273565,\n            \"price\": 16,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632766179,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf686a3137cfd16eefdf\",\n                    \"name\": \"F. Scott Fitzgerald\",\n                    \"biography\": \"American novelist and short story writer.\",\n                    \"nationality\": \"American\",\n                    \"dob\": -2312150400000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630312691\n                }\n            ],\n            \"publicationDate\": \"1925-04-10T00:00:00.000Z\"\n        },\n        {\n            \"_id\": \"64f2c96b1b84e9adb8b02b79\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be3b611e091b44480da1\",\n                \"name\": \"HarperCollins\",\n                \"email\": \"harper@gmail.com\",\n                \"phone\": \"234-000-0001\",\n                \"address\": \"456 Novel Ave, City\"\n            },\n            \"title\": \"To Kill a Mockingbird\",\n            \"description\": \"-\",\n            \"isbn\": 9780061120084,\n            \"price\": 12.99,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632875158,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf8a6a3137cfd16eefe0\",\n                    \"name\": \"Harper Lee\",\n                    \"biography\": \"Known for her 1960 novel \\\"To Kill a Mockingbird\\\".\",\n                    \"nationality\": \"American\",\n                    \"dob\": -1378425600000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630346305,\n                    \"updatedAt\": 1693630840019\n                }\n            ],\n            \"publicationDate\": \"1960-07-11T00:00:00.000Z\"\n        },\n        {\n            \"_id\": \"64f2c9ec1b84e9adb8b02b7a\",\n            \"categories\": {\n                \"_id\": \"64f2bd80611e091b44480d9f\",\n                \"name\": \"Science\",\n                \"description\": \"Works based on facts, principles, and theories.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be5a611e091b44480da2\",\n                \"name\": \"Bantam\",\n                \"email\": \"bantam@email.com\",\n                \"phone\": \"345-000-0002\",\n                \"address\": \"789 Page Rd, City\"\n            },\n            \"title\": \"A Brief History of Time\",\n            \"description\": \"-\",\n            \"isbn\": 9780553380163,\n            \"price\": 18.99,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693633004778,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2c6711d59a0cdecfa7a9c\",\n                    \"name\": \"Stephen Hawking\",\n                    \"biography\": \"Theoretical physicist, cosmologist, and author.\",\n                    \"nationality\": \"British\",\n                    \"dob\": -883008000000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693632113456\n                }\n            ],\n            \"publicationDate\": \"1988-04-01T00:00:00.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Book by Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/books?categories=Fiction",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "categories",
+									"value": "Fiction"
+								},
+								{
+									"key": "categories",
+									"value": "64f2bd80611e091b44480d9f",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search Book by Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/books?categories=Fiction",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"books"
+									],
+									"query": [
+										{
+											"key": "categories",
+											"value": "Fiction"
+										},
+										{
+											"key": "categories",
+											"value": "64f2bd80611e091b44480d9f",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1554"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:10:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2c8fe1b84e9adb8b02b78\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be1b611e091b44480da0\",\n                \"name\": \"Scribner\",\n                \"email\": \"scribner@gmail.com\",\n                \"phone\": \"123-000-0000\",\n                \"address\": \"123 Book St, City\"\n            },\n            \"title\": \"The Great Gatsby\",\n            \"description\": \"-\",\n            \"isbn\": 9780743273565,\n            \"price\": 16,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632766179,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf686a3137cfd16eefdf\",\n                    \"name\": \"F. Scott Fitzgerald\",\n                    \"biography\": \"American novelist and short story writer.\",\n                    \"nationality\": \"American\",\n                    \"dob\": -2312150400000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630312691\n                }\n            ],\n            \"publicationDate\": \"1925-04-10T00:00:00.000Z\"\n        },\n        {\n            \"_id\": \"64f2c96b1b84e9adb8b02b79\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be3b611e091b44480da1\",\n                \"name\": \"HarperCollins\",\n                \"email\": \"harper@gmail.com\",\n                \"phone\": \"234-000-0001\",\n                \"address\": \"456 Novel Ave, City\"\n            },\n            \"title\": \"To Kill a Mockingbird\",\n            \"description\": \"-\",\n            \"isbn\": 9780061120084,\n            \"price\": 12.99,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632875158,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf8a6a3137cfd16eefe0\",\n                    \"name\": \"Harper Lee\",\n                    \"biography\": \"Known for her 1960 novel \\\"To Kill a Mockingbird\\\".\",\n                    \"nationality\": \"American\",\n                    \"dob\": -1378425600000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630346305,\n                    \"updatedAt\": 1693630840019\n                }\n            ],\n            \"publicationDate\": \"1960-07-11T00:00:00.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Book by authors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/books?authors=Scott",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "authors",
+									"value": "Scott"
+								},
+								{
+									"key": "authors[]",
+									"value": "64f2bf686a3137cfd16eefdf",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Books by authors",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/books?authors=Scott",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"books"
+									],
+									"query": [
+										{
+											"key": "authors",
+											"value": "Scott"
+										},
+										{
+											"key": "authors[]",
+											"value": "64f2bf686a3137cfd16eefdf",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "777"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:09:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 1,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2c8fe1b84e9adb8b02b78\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be1b611e091b44480da0\",\n                \"name\": \"Scribner\",\n                \"email\": \"scribner@gmail.com\",\n                \"phone\": \"123-000-0000\",\n                \"address\": \"123 Book St, City\"\n            },\n            \"title\": \"The Great Gatsby\",\n            \"description\": \"-\",\n            \"isbn\": 9780743273565,\n            \"price\": 16,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632766179,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf686a3137cfd16eefdf\",\n                    \"name\": \"F. Scott Fitzgerald\",\n                    \"biography\": \"American novelist and short story writer.\",\n                    \"nationality\": \"American\",\n                    \"dob\": -2312150400000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630312691\n                }\n            ],\n            \"publicationDate\": \"1925-04-10T00:00:00.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Book by title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/books?title=The Great Gatsby",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "The Great Gatsby"
+								},
+								{
+									"key": "title[$regex]",
+									"value": "Great",
+									"disabled": true
+								},
+								{
+									"key": "title[$options]",
+									"value": "i",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Books by title",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{hostURL}}/books?title=The Great Gatsby",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"books"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "The Great Gatsby"
+										},
+										{
+											"key": "title[$regex]",
+											"value": "Great",
+											"disabled": true
+										},
+										{
+											"key": "title[$options]",
+											"value": "i",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "777"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Sep 2023 09:08:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 1,\n    \"limit\": 10,\n    \"skip\": 0,\n    \"data\": [\n        {\n            \"_id\": \"64f2c8fe1b84e9adb8b02b78\",\n            \"categories\": {\n                \"_id\": \"64f2bd72611e091b44480d9e\",\n                \"name\": \"Fiction\",\n                \"description\": \"Literary works invented by the imagination.\"\n            },\n            \"publisher\": {\n                \"_id\": \"64f2be1b611e091b44480da0\",\n                \"name\": \"Scribner\",\n                \"email\": \"scribner@gmail.com\",\n                \"phone\": \"123-000-0000\",\n                \"address\": \"123 Book St, City\"\n            },\n            \"title\": \"The Great Gatsby\",\n            \"description\": \"-\",\n            \"isbn\": 9780743273565,\n            \"price\": 16,\n            \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n            \"createdAt\": 1693632766179,\n            \"authors\": [\n                {\n                    \"_id\": \"64f2bf686a3137cfd16eefdf\",\n                    \"name\": \"F. Scott Fitzgerald\",\n                    \"biography\": \"American novelist and short story writer.\",\n                    \"nationality\": \"American\",\n                    \"dob\": -2312150400000,\n                    \"createdBy\": \"64f22ce288aa68fe04735e6e\",\n                    \"createdAt\": 1693630312691\n                }\n            ],\n            \"publicationDate\": \"1925-04-10T00:00:00.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"authors\": [\"64f2c6711d59a0cdecfa7a9c\"],\n    \"categories\": \"64f2bd80611e091b44480d9f\",\n    \"publisher\": \"64f2be5a611e091b44480da2\",\n    \"title\": \"A Brief History of Time\",\n    \"description\": \"-\",\n    \"isbn\": 9780553380163,\n    \"publicationDate\": \"1988-04-01\",\n    \"price\":18.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/books",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Books",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authors\": [\"64f2c6711d59a0cdecfa7a9c\"],\n    \"categories\": \"64f2bd80611e091b44480d9f\",\n    \"publisher\": \"64f2be5a611e091b44480da2\",\n    \"title\": \"A Brief History of Time\",\n    \"description\": \"-\",\n    \"isbn\": 9780553380163,\n    \"publicationDate\": \"1988-04-01\",\n    \"price\":18.99\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{hostURL}}/books",
+									"host": [
+										"{{hostURL}}"
+									],
+									"path": [
+										"books"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "349"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 03 Sep 2023 03:14:00 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"64f3f9f86fbc555998381faf\",\n    \"authors\": [\n        \"64f2c6711d59a0cdecfa7a9c\"\n    ],\n    \"categories\": \"64f2bd80611e091b44480d9f\",\n    \"publisher\": \"64f2be5a611e091b44480da2\",\n    \"title\": \"A Brief History of Time\",\n    \"description\": \"-\",\n    \"isbn\": 9780553380163,\n    \"price\": 18.99,\n    \"createdBy\": \"64f3eed4f9b3c8d63cb7bb65\",\n    \"createdAt\": 1693710840119,\n    \"publicationDate\": \"1988-04-01T00:00:00.000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit Books",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title Edit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/books/64f2fb1f830ff25d0b487c85",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books",
+								"64f2fb1f830ff25d0b487c85"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Books",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/books/64f2fb1f830ff25d0b487c85",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"books",
+								"64f2fb1f830ff25d0b487c85"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing books, search books by book name, author and category name.  \nAnd also, add a new book, update the book and remove the book.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Sells",
+			"item": [
+				{
+					"name": "Get Sells",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/sells",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"sells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sells",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2023-09-02\",\n    \"customer\": \"64f2be9f611e091b44480da3\",\n    \"discount\": 10,\n    \"totalPaid\": 40,\n    \"detail\": [\n        {\n            \"book\": \"64f2c8fe1b84e9adb8b02b78\",\n            \"qty\": 2,\n            \"price\": 16\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/sells",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"sells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Sells",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Edit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostURL}}/sells/64f2b3b01350884533a7c9df",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"sells",
+								"64f2b3b01350884533a7c9df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Sells",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/sells/64f2b3b01350884533a7c9df",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"sells",
+								"64f2b3b01350884533a7c9df"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "For managing selling books, users can add selling books with corresponding data  \n(book name, customer name, quantity and discount). Total amount shows the  \ntotal cost of the books and next you have to enter how much money to pay.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
