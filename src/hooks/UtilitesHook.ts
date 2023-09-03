@@ -51,6 +51,37 @@ export const populatePublishers = async (context: HookContext) => {
   ]
 }
 
+export const populateCustomers = async (context: HookContext) => {
+  context.params.pipeline = [
+    ...context.params?.pipeline || [],
+    {
+      $lookup: {
+        from: 'customers',
+        localField: 'customer',
+        foreignField: '_id',
+        as: 'customer'
+      }
+    },
+    { $unwind: { path: '$customer' } }
+  ]
+}
+export const populateCreatedBy = async (context: HookContext) => {
+  context.params.pipeline = [
+    ...context.params?.pipeline || [],
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'createdBy',
+        foreignField: '_id',
+        as: 'createdBy'
+      }
+    },
+
+    { $unwind: { path: '$createdBy' } },
+    { $unset: ["createdBy.password","createdBy.createdAt"] },
+  ]
+}
+
 export const changeAuthorToId = async (context: HookContext) => {
   if (context.params.query?.authors && !Array.isArray(context.params.query?.authors)){
     const keyword = context.params.query.authors;

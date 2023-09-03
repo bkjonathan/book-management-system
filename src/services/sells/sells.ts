@@ -16,7 +16,7 @@ import {
 
 import type { Application } from '../../declarations'
 import { SellsService, getOptions } from './sells.class'
-import {calculateSell, changeDateToNumber} from "../../hooks/UtilitesHook";
+import {calculateSell, changeDateToNumber, populateCreatedBy, populateCustomers} from '../../hooks/UtilitesHook'
 
 export const sellsPath = 'sells'
 export const sellsMethods = ['find', 'get', 'create', 'patch', 'remove'] as const
@@ -43,10 +43,20 @@ export const sells = (app: Application) => {
       ]
     },
     before: {
-      all: [changeDateToNumber('date'),schemaHooks.validateQuery(sellsQueryValidator), schemaHooks.resolveQuery(sellsQueryResolver)],
+      all: [
+        changeDateToNumber('date'),
+        populateCustomers,
+        populateCreatedBy,
+        schemaHooks.validateQuery(sellsQueryValidator),
+        schemaHooks.resolveQuery(sellsQueryResolver)
+      ],
       find: [],
       get: [],
-      create: [calculateSell,schemaHooks.validateData(sellsDataValidator), schemaHooks.resolveData(sellsDataResolver)],
+      create: [
+        calculateSell,
+        schemaHooks.validateData(sellsDataValidator),
+        schemaHooks.resolveData(sellsDataResolver)
+      ],
       patch: [schemaHooks.validateData(sellsPatchValidator), schemaHooks.resolveData(sellsPatchResolver)],
       remove: []
     },
