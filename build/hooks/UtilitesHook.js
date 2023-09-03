@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.calculateSell = exports.changeCategoryToId = exports.changeAuthorToId = exports.populatePublishers = exports.populateCategories = exports.populateAuthors = exports.changeDateToNumber = void 0;
+exports.calculateSell = exports.changeCategoryToId = exports.changeAuthorToId = exports.populateCreatedBy = exports.populateCustomers = exports.populatePublishers = exports.populateCategories = exports.populateAuthors = exports.changeDateToNumber = void 0;
 const changeDateToNumber = (key) => {
     return async (context) => {
         if (context.data && context.data[key]) {
@@ -52,6 +52,37 @@ const populatePublishers = async (context) => {
     ];
 };
 exports.populatePublishers = populatePublishers;
+const populateCustomers = async (context) => {
+    context.params.pipeline = [
+        ...context.params?.pipeline || [],
+        {
+            $lookup: {
+                from: 'customers',
+                localField: 'customer',
+                foreignField: '_id',
+                as: 'customer'
+            }
+        },
+        { $unwind: { path: '$customer' } }
+    ];
+};
+exports.populateCustomers = populateCustomers;
+const populateCreatedBy = async (context) => {
+    context.params.pipeline = [
+        ...context.params?.pipeline || [],
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'createdBy',
+                foreignField: '_id',
+                as: 'createdBy'
+            }
+        },
+        { $unwind: { path: '$createdBy' } },
+        { $unset: ["createdBy.password", "createdBy.createdAt"] },
+    ];
+};
+exports.populateCreatedBy = populateCreatedBy;
 const changeAuthorToId = async (context) => {
     if (context.params.query?.authors && !Array.isArray(context.params.query?.authors)) {
         const keyword = context.params.query.authors;

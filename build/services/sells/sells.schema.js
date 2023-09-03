@@ -30,7 +30,15 @@ exports.sellsSchema = typebox_1.Type.Object({
 }, { $id: 'Sells', additionalProperties: false });
 exports.sellsValidator = (0, typebox_1.getValidator)(exports.sellsSchema, validators_1.dataValidator);
 exports.sellsResolver = (0, schema_1.resolve)({});
-exports.sellsExternalResolver = (0, schema_1.resolve)({});
+exports.sellsExternalResolver = (0, schema_1.resolve)({
+    detail: async (value, obj, context) => {
+        let tmp = value?.map(async (v) => {
+            v.book = await context.app.service('books').get(v.book);
+            return v;
+        });
+        return await Promise.all(tmp);
+    }
+});
 // Schema for creating new entries
 exports.sellsDataSchema = typebox_1.Type.Pick(exports.sellsSchema, ['date', 'customer', 'netTotal', 'total', 'totalReturn', 'totalPaid', 'discount', 'detail'], {
     $id: 'SellsData'

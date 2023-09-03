@@ -16,7 +16,12 @@ import {
 
 import type { Application } from '../../declarations'
 import { SellsService, getOptions } from './sells.class'
-import {calculateSell, changeDateToNumber, populateCreatedBy, populateCustomers} from '../../hooks/UtilitesHook'
+import {
+  calculateSell,
+  changeDateToNumber,
+  populateCreatedBy,
+  populateCustomers,
+} from '../../hooks/UtilitesHook'
 
 export const sellsPath = 'sells'
 export const sellsMethods = ['find', 'get', 'create', 'patch', 'remove'] as const

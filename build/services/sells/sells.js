@@ -44,10 +44,20 @@ const sells = (app) => {
             ]
         },
         before: {
-            all: [(0, UtilitesHook_1.changeDateToNumber)('date'), schema_1.hooks.validateQuery(sells_schema_1.sellsQueryValidator), schema_1.hooks.resolveQuery(sells_schema_1.sellsQueryResolver)],
+            all: [
+                (0, UtilitesHook_1.changeDateToNumber)('date'),
+                UtilitesHook_1.populateCustomers,
+                UtilitesHook_1.populateCreatedBy,
+                schema_1.hooks.validateQuery(sells_schema_1.sellsQueryValidator),
+                schema_1.hooks.resolveQuery(sells_schema_1.sellsQueryResolver)
+            ],
             find: [],
             get: [],
-            create: [UtilitesHook_1.calculateSell, schema_1.hooks.validateData(sells_schema_1.sellsDataValidator), schema_1.hooks.resolveData(sells_schema_1.sellsDataResolver)],
+            create: [
+                UtilitesHook_1.calculateSell,
+                schema_1.hooks.validateData(sells_schema_1.sellsDataValidator),
+                schema_1.hooks.resolveData(sells_schema_1.sellsDataResolver)
+            ],
             patch: [schema_1.hooks.validateData(sells_schema_1.sellsPatchValidator), schema_1.hooks.resolveData(sells_schema_1.sellsPatchResolver)],
             remove: []
         },

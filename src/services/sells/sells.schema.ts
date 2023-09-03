@@ -37,7 +37,15 @@ export type Sells = Static<typeof sellsSchema>
 export const sellsValidator = getValidator(sellsSchema, dataValidator)
 export const sellsResolver = resolve<Sells, HookContext>({})
 
-export const sellsExternalResolver = resolve<Sells, HookContext>({})
+export const sellsExternalResolver = resolve<Sells, HookContext>({
+  detail: async (value,obj,context)=>{
+    let tmp:any = value?.map(async (v)=>{
+      v.book = await context.app.service('books').get(v.book as string)
+      return v;
+    });
+    return await Promise.all(tmp)
+  }
+})
 
 // Schema for creating new entries
 export const sellsDataSchema = Type.Pick(sellsSchema, ['date','customer','netTotal','total','totalReturn','totalPaid','discount','detail'], {
