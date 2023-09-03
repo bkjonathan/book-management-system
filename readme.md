@@ -1,10 +1,14 @@
-# book-store-management
+# Book Store Management
 
-> Book Store Management
+> Node JS (Feathers)
 
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source framework for building APIs and real-time applications.
+
+## Api Documentation
+https://documenter.getpostman.com/view/16473367/2s9Y5cugYX
+
 
 ## Getting Started
 
@@ -22,20 +26,30 @@ This project uses [Feathers](http://feathersjs.com). An open source framework fo
     npm run compile # Compile TypeScript source
     npm start
     ```
+4. Features
+>  (1)  Login / Register
+>
+> (2)  For managing book categories, users can view category lists , add new
+categories and remove categories.
+>
+> (3)  For managing book authors, users can view authors lists , add new
+authors and remove authors.
+>
+> (4) For managing book publishers, users can view publishers lists , add new
+publishers and remove publishers.
+>
+>(5) For managing books, search books by book name, author and category name.
+And also, add a new book, update the book and remove the book.
+>
+>(6) For managing selling books, users can add selling books with corresponding data
+(book name, customer name, quantity and discount). Total amount shows the
+total cost of the books and next you have to enter how much money to pay.
+For managing sale records, users can see and manage sales records with sell id,
+customer name, amount, paid and due.Calculate the total amount and total
+paid.
+>
+>(7) For managing customer records, users can view and manage customers. Update
+and Remove customer data also.
 
-## Testing
 
-Run `npm test` and all your tests in the `test/` directory will be run.
 
-## Scaffolding
-
-This app comes with a powerful command line interface for Feathers. Here are a few things it can do:
-
-```
-$ npx feathers help                           # Show all commands
-$ npx feathers generate service               # Generate a new Service
-```
-
-## Help
-
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
